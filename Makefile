@@ -4,4 +4,4 @@ build:
 	scalac main.scala
 
 run: build
-	scala main
+	scala main 6Ruuvaaaaaa
