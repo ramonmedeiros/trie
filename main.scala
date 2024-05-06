@@ -2,7 +2,7 @@ import scala.io.Source
 
 class TrieNode {
   val children = new Array[TrieNode](50)
-  var value = " ".charAt(0) 
+  var value = new String("")
 }
 
 def constructTrie(filename: String, root: TrieNode): Unit = {
@@ -14,25 +14,23 @@ def constructTrie(filename: String, root: TrieNode): Unit = {
       val calc = (c - 'a').abs
       if (node.children(calc) == null){
         node.children(calc) = new TrieNode
-        node.value = c
       }
       node = node.children(calc)
     }
+    node.value = word
   }
   source.close()
 }
 
 def findWord(word: String, root: TrieNode): String = {
   var node = root
-  var prefix = ""
   for (c <- word) {
     val calc = (c - 'a').abs
     if (node.children(calc) != null) {
       node = node.children(calc)
-      prefix = prefix + c
     }
   }
-  prefix
+  node.value
 }
 
 @main def main(filename: String, word: String): Unit = {
