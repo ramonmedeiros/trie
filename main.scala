@@ -1,13 +1,11 @@
 import scala.io.Source
 
-def filename = "sample_prefixes.txt"
-
 class TrieNode {
   val children = new Array[TrieNode](50)
   var value = " ".charAt(0) 
 }
 
-def constructTrie(root: TrieNode): Unit = {
+def constructTrie(filename: String, root: TrieNode): Unit = {
   val source = Source.fromFile(filename)
   val lines = source.getLines
   for (word <- lines) {
@@ -37,8 +35,8 @@ def findWord(word: String, root: TrieNode): String = {
   prefix
 }
 
-@main def main(word: String): Unit = {
+@main def main(filename: String, word: String): Unit = {
   var root = new TrieNode
-  constructTrie(root)
+  constructTrie(filename, root)
   println(findWord(word, root))
 }
